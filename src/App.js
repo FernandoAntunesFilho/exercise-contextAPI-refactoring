@@ -1,11 +1,41 @@
 import React from 'react';
 import './App.css';
 import Cars from './Cars';
+import myContext from './context/MyContext';
 
-function App() {
-  return (
-    <Cars />
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+   
+    this.state = {
+      cars: {
+        red: false,
+        blue: false,
+        yellow: false,
+      }
+    }
+
+  }
+
+  moveCar = (car, side) => {
+    this.setState({
+      cars: {
+        [car]: side,
+      }
+    })
+  }
+
+  render() {
+    const contextValue = {
+      state: this.state,
+      moveCar: this.moveCar,
+    }
+    return (
+      <myContext.Provider value={ contextValue }>
+        <Cars />
+      </myContext.Provider>
+    );
+  }
 }
 
 export default App;
