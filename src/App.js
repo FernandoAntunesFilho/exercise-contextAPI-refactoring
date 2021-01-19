@@ -18,11 +18,9 @@ class App extends React.Component {
   }
 
   moveCar = (car, side) => {
-    this.setState({
-      cars: {
-        [car]: side,
-      }
-    })
+    this.setState((state) => ({
+      ...state, cars: { ...state.cars, [car]: side }
+    }))
   }
 
   render() {
